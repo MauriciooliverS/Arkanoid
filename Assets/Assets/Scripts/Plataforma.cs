@@ -7,14 +7,22 @@ public class Plataforma : MonoBehaviour
     private Rigidbody2D rB2D;
     public float Speed = 1.0f;
     public float bounceForce = 10f;
+    public Bola bolinha;
+    public GAmever gameOver;
  
     void Start()
     {
         rB2D = GetComponent<Rigidbody2D>();
+        bounceForce = 12;
+        if (bolinha.pontos == 45)
+        {
+            bounceForce = 17;
+        }
     }
 
     void Update()
     {
+        
         if (Input.GetKey(KeyCode.RightArrow))
         {
             rB2D.transform.Translate(Speed *Time.deltaTime, 0, 0);
@@ -31,6 +39,8 @@ public class Plataforma : MonoBehaviour
         {
             rB2D.transform.Translate(-Speed *Time.deltaTime, 0, 0);
         }
+
+       
     }
 
 private void OnCollisionEnter2D(Collision2D collision)
@@ -51,7 +61,7 @@ private void OnCollisionEnter2D(Collision2D collision)
             {
                 // Aplique o impulso com base no hitFactor e na for�a de impulso
                 Vector2 bounceDirection = new Vector2(hitFactor, 1).normalized; // Dire��o para cima e para os lados
-                ballRb.velocity = bounceDirection * bounceForce; // Aplica o impulso na bola
+                ballRb.linearVelocity = bounceDirection * bounceForce; // Aplica o impulso na bola
             }
 
 

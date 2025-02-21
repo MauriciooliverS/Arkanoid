@@ -8,10 +8,11 @@ public class Bola : MonoBehaviour
 {
     public bool estaVivo = true;
     public int pontos;
+    public GAmever gameOver;
     // Start is called before the first frame update
     void Start()
     {
-        
+        estaVivo = true;
     }
 
     // Update is called once per frame
@@ -24,14 +25,20 @@ public class Bola : MonoBehaviour
         
         if(collision.gameObject.CompareTag("Morte"))
         {
-            Time.timeScale = 0;
+            gameOver.MorrePlayer();
+            estaVivo = false;
         }
         if(collision.gameObject.CompareTag("Bases"))
         {
              Destroy(collision.gameObject);
             pontos ++;
         }
+        
     }
+    // public int PegaPontos()
+    // {
+    //     return pontos;
+    // }
 }
 
     
